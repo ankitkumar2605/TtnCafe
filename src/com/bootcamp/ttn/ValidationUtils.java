@@ -4,51 +4,58 @@ import java.util.regex.Pattern;
 
 public class ValidationUtils {
 
-    public static boolean authenticateID(User user, String name, String password){
+    public static boolean isValidUser(String userEmail, String userId, String userPassword) {
 
-        if(name.indexOf('@')!=-1) {
+        if (isUserIdValid(userId)) {
 
-            if(Pattern.matches("[a-zA-Z0-9.]+@[a-zA-Z0-9]+.[a-zA-Z0-9]{3}",name)) {
+            if (isValidEmail(userEmail)) {
 
-                if(ValidationUtils.isPasswordValid(password))
-                {
+                if (isPasswordValid(userPassword)) {
                     System.out.println("User Logged in...");
                     return true;
-                }
-                else {
+                } else {
                     System.out.println("Please enter correct password");
-                    return false;
+
                 }
 
-            }
-            else {
+
+            } else {
                 System.out.println("Please enter valid username or emailid");
-                return false;
+
             }
+        } else {
+            System.out.println("Please enter valid userId");
 
         }
 
-        else if(Pattern.matches("[[a-zA-Z]+[0-9]]{6,15}",name)) {
-
-            if(ValidationUtils.isPasswordValid(password))
-            {
-                System.out.println("User Logged in...");
-                return true;
-            }
-            else {
-                System.out.println("Please enter correct password");
-                return false;
-            }
-
-        }
-
-        else
-            System.out.println("Please enter valid username or emailid");
         return false;
     }
 
+    public static boolean isValidEmail(String email) {
+        return Pattern.matches("[a-zA-Z0-9.]+@[a-zA-Z0-9]+.[a-zA-Z0-9]{3}", email);
+    }
+
+
     public static boolean isPasswordValid(String password) {
+
         return Pattern.matches("^[a-zA-Z0-9_]{7,}$", password);
     }
 
+    public static boolean isUserIdValid(String userId) {
+
+        return Pattern.matches("[\\d]{7}", userId);
+    }
+
+    public static boolean authenticateCredentials(String adminEmail, String adminPassword, String email, String password) {
+        try{
+            if (adminEmail.equals(email)) {
+                if (adminPassword.equals(password)) {
+                    return true;
+                }
+
+            }throw new InvalidUserException("Invalid User Credentials!!!!!!");
+        }catch (InvalidUserException iUE){
+            return false;
+        }
+    }
 }
