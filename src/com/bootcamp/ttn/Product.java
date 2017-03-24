@@ -3,9 +3,8 @@ package com.bootcamp.ttn;
 /**
  * Created by ankit on 23/3/17.
  */
-public class Product {
+public class Product extends TTNCafeBase{
 
-    private String productId;
     private int price;
     private int quantity;
 
@@ -18,19 +17,11 @@ public class Product {
     }
 
     public Product(String productId, int price,int quantity) {
-        this.productId = productId;
+        super(productId);
         this.price = price;
         this.quantity = quantity;
     }
 
-    public String getProductId() {
-
-        return productId;
-    }
-
-    public void setProductId(String productId) {
-        this.productId = productId;
-    }
 
     public int getPrice() {
         return price;

@@ -1,5 +1,7 @@
 package com.bootcamp.ttn;
 
+import com.sun.javafx.binding.StringFormatter;
+
 import java.util.Scanner;
 
 /**
@@ -49,7 +51,7 @@ public class AdminController extends Controller implements Runnable{
         String productid = "";
         char removeMoreProducts;
         do {
-            System.out.print("Enter product id:");
+            System.out.print("Enter product id : ");
             productid = input.nextLine();
             admin.removeProduct(productid);
             System.out.print("Do you want to remove more products ? ( y / n ) : ");
@@ -78,13 +80,13 @@ public class AdminController extends Controller implements Runnable{
                 System.out.println("User already Exists!!!!!");
             } else if (ValidationUtils.isValidUser(userEmail, userId, userPassword)) {
                 if (admin.addUser(new Employee(userId, userName, userEmail, userPassword))) {
-                    System.out.println("Employee added successfully");
-                    System.out.println("No of employees" + admin.getEmployeeList().size());
+                    System.out.println("Employee added successfully!!!!!!!!");
+                    System.out.println("No of employees : " + admin.getEmployeeList().size());
                 } else {
                     System.out.println("User Not Added!!!!!!");
                 }
             } else {
-                System.out.println("Enter correct credentials");
+                System.out.println("Enter correct credentials!!!!!!");
             }
             System.out.print("Do you want to add more users ? ( y / n )");
             addMore = sc.nextLine().charAt(0);
@@ -103,9 +105,9 @@ public class AdminController extends Controller implements Runnable{
     }
 
     public void viewEmployeeList(){
+        System.out.println("|Employee ID    |Employee Name  |Employee Email |");
         for (Employee emp : admin.getEmployeeList()) {
-            System.out.println("EmailID : "+emp.getEmail());
-            System.out.println("Id : "+emp.getId());
+            System.out.printf(" %13s | %13s | %13s \n",emp.getId(),emp.getName(),emp.getEmail());
         }
 
     }
@@ -122,7 +124,7 @@ public class AdminController extends Controller implements Runnable{
                                "\t\t* 4. VIEW USERS                          *\n" +
                                "\t\t* 5. REMOVE PRODUCT                      *");
             System.out.println("\t\t******************************************");
-            System.out.print("\n\nEnter your choice ( 1 / 2 / 3 ) : ");
+            System.out.print("\n\nEnter your choice ( 1 / 2 / 3 / 4 / 5 ) : ");
             char choice = sc.nextLine().charAt(0);
             if (choice == '1') {
                 addUser(admin);
@@ -139,13 +141,14 @@ public class AdminController extends Controller implements Runnable{
             } else {
                 System.out.println("Please select valid option!!!!!!");
             }
-            System.out.println("Do you want to continue as Admin : ");
+            System.out.print("Do you want to continue as Admin : ");
             adminContinue = sc.nextLine().charAt(0);
         } while (adminContinue == 'Y'||adminContinue == 'y');
     }
 
     public void authenticateAdmin(String email,String password){
         if (ValidationUtils.authenticateCredentials(admin.getEmail(), admin.getPassword(), email, password)) {
+            System.out.println("............Succesfully logged In............");
             System.out.println("No of employees : " + admin.getEmployeeList().size());
             showAdminUI();
         } else {

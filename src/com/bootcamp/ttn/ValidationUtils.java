@@ -11,7 +11,6 @@ public class ValidationUtils {
             if (isValidEmail(userEmail)) {
 
                 if (isPasswordValid(userPassword)) {
-                    System.out.println("User Logged in...");
                     return true;
                 } else {
                     System.out.println("Please enter correct password");

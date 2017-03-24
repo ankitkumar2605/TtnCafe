@@ -1,31 +1,21 @@
 package com.bootcamp.ttn;
 
-public class User{
-    protected String id;
+public class User extends TTNCafeBase{
     protected String name;
     protected String email;
     protected String password;
 
     public User() {
-        this.id = "";
         this.name = "";
         this.email = "";
         this.password = "user";
     }
 
     public User(String  id, String name, String email, String password) {
-        this.id = id;
+        super(id);
         this.name = name;
         this.email = email;
         this.password = password;
-    }
-
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
     }
 
     public String getName() {

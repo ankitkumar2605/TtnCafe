@@ -65,7 +65,7 @@ public class Admin extends User implements TTNCafeInterface{
     }
 
     public void addNewProduct(Product product) {
-        Product prod = inventory.put(product.getProductId(), product);
+        Product prod = inventory.put(product.getId(), product);
         if (prod != null)
             System.out.println("Product id already exists!!!!!");
     }
@@ -98,10 +98,11 @@ public class Admin extends User implements TTNCafeInterface{
     }
 
     public void printInventory() {
+        System.out.println("|     Product ID     |  Product Quantity  |   Product Price    |");
         for (Map.Entry<String, Product> entry : inventory.entrySet()) {
             String key = entry.getKey();
             Product product = (Product) entry.getValue();
-            System.out.println("Product id:" + key + " Product Quantity:" + product.getQuantity());
+            System.out.printf("| %18s | %18s | %18s |\n",key,product.getQuantity(),product.getPrice());
         }
     }
 }
