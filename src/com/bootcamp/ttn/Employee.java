@@ -1,6 +1,6 @@
 package com.bootcamp.ttn;
 
-public class Employee extends User{
+public class Employee extends User implements TTNCafeInterface{
 
     private  int balance;
 
@@ -11,13 +11,19 @@ public class Employee extends User{
     }
 
 
+    public Employee() {
+    }
 
     public int getBalance() {
         return balance;
     }
 
-    public void setBalance(int balance) {
+    @Override
+    public void setBalance() {
+        this.balance = balance;
+    }
 
+    public void updateBalance(int balance) {
         this.balance = balance;
     }
 }

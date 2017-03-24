@@ -1,6 +1,6 @@
 package com.bootcamp.ttn;
 
-public class User {
+public class User{
     protected String id;
     protected String name;
     protected String email;
