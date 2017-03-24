@@ -35,6 +35,7 @@ public class EmployeeController extends Controller implements Runnable {
         char wantContinue;
         admin.printInventory();
         do {
+            System.out.println("Available Balance : " + employee.getBalance());
             System.out.print("Enter the product id which you want to purchase : ");
             Scanner input = new Scanner(System.in);
             productId = input.nextLine();
@@ -43,13 +44,12 @@ public class EmployeeController extends Controller implements Runnable {
             if (productQuantity < 0) {
                 System.out.println("Enter valid quantity!!!!");
             } else {
-
-                int computedCost = admin.getTotalCost(productId, productQuantity);
-                if (computedCost != 0) {
-                    if (employee.getBalance() >= computedCost) {
+                int totalCost = admin.getTotalCost(productId, productQuantity);
+                if (totalCost != 0) {
+                    if (employee.getBalance() >= totalCost) {
                         admin.updateInventory(productId, productQuantity);
                         admin.printInventory();
-                        employee.updateBalance(employee.getBalance() - computedCost);
+                        employee.updateBalance(employee.getBalance() - totalCost);
                     } else {
                         System.out.println("Balance Not Available!!!!!!!!");
                     }

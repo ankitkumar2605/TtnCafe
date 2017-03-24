@@ -79,10 +79,12 @@ public class Admin extends User implements TTNCafeInterface{
         }
     }
     public int getTotalCost(String productId, int quantity){
-        if(inventory.get(productId)!=null)
-        return  inventory.get(productId).getPrice() * quantity;
-        else
-            return 0;
+        if(inventory.get(productId)!=null){
+            if(quantity <= inventory.get(productId).getQuantity()){
+                return inventory.get(productId).getPrice() * quantity;
+            }
+        }
+        return 0;
     }
 
     public void updateInventory(String productid,int quantity) {
@@ -98,6 +100,7 @@ public class Admin extends User implements TTNCafeInterface{
     }
 
     public void printInventory() {
+        System.out.println("**********Item List**********");
         System.out.println("|     Product ID     |  Product Quantity  |   Product Price    |");
         for (Map.Entry<String, Product> entry : inventory.entrySet()) {
             String key = entry.getKey();
