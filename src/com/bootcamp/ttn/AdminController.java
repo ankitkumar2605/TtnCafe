@@ -5,7 +5,7 @@ import java.util.Scanner;
 public class AdminController extends Controller{
 
     public void startNewAdminThread(){
-        Thread adminThread = new Thread(new AdminThread());
+        Thread adminThread = new Thread(new AdminThread(this));
         adminThread.start();
         try {
             adminThread.join();
@@ -14,9 +14,8 @@ public class AdminController extends Controller{
         }
 
     }
+
     public void addProductIntoInventory(Admin admin) {
-
-
         Scanner input = new Scanner(System.in);
         char addMoreProduct = 'y';
         String productid = "";
@@ -31,12 +30,9 @@ public class AdminController extends Controller{
             quantity = input.nextInt();
             admin.addNewProduct(new Product(productid, price, quantity));
             input.nextLine();
-
-            System.out.print("Do you want to add more products ? ( y / n)");
+            System.out.print("Do you want to add more products ( Y / N) ? : ");
             addMoreProduct = input.nextLine().charAt(0);
         } while (addMoreProduct == 'y' || addMoreProduct == 'Y');
-
-
     }
 
     public void removeProductFromInventory(Admin admin) {
@@ -47,7 +43,7 @@ public class AdminController extends Controller{
             System.out.print("Enter product id : ");
             productid = input.nextLine();
             admin.removeProduct(productid);
-            System.out.print("Do you want to remove more products ? ( y / n ) : ");
+            System.out.print("Do you want to remove more products ( Y / N ) ? : ");
             removeMoreProducts = input.nextLine().charAt(0);
         } while (removeMoreProducts == 'y' || removeMoreProducts == 'Y');
     }
@@ -81,7 +77,7 @@ public class AdminController extends Controller{
             } else {
                 System.out.println("Enter correct credentials!!!!!!");
             }
-            System.out.print("Do you want to add more users ? ( y / n )");
+            System.out.print("Do you want to add more users ( Y / N ) ? : ");
             addMore = sc.nextLine().charAt(0);
         } while (addMore == 'y' || addMore == 'Y');
         System.out.println("No of employees : " + admin.getEmployeeList().size());
@@ -100,7 +96,7 @@ public class AdminController extends Controller{
     public void viewEmployeeList(){
         System.out.println("|Employee ID    |Employee Name  |Employee Email |");
         for (Employee emp : admin.getEmployeeList()) {
-            System.out.printf(" %13s | %13s | %13s \n",emp.getId(),emp.getName(),emp.getEmail());
+            System.out.printf(" %-13s | %-13s | %-13s \n",emp.getId(),emp.getName(),emp.getEmail());
         }
 
     }
@@ -134,7 +130,7 @@ public class AdminController extends Controller{
             } else {
                 System.out.println("Please select valid option!!!!!!");
             }
-            System.out.print("Do you want to continue as Admin : ");
+            System.out.print("Do you want to continue as Admin ( Y / N ) ? : ");
             adminContinue = sc.nextLine().charAt(0);
         } while (adminContinue == 'Y'||adminContinue == 'y');
     }
@@ -148,6 +144,4 @@ public class AdminController extends Controller{
             System.out.println("Invalid username or password!!!!!!");
         }
     }
-
-
 }

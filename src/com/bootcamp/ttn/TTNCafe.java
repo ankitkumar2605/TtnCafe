@@ -38,7 +38,7 @@ public class TTNCafe {
                 employeeController.startNewEmployeeThread();
             }
             System.out.println("You are logged out!!!!!\n");
-            System.out.print("Do you want to login : ");
+            System.out.print("Do you want to login ( Y / N ): ");
             loginAgain = sc.nextLine().charAt(0);
         } while (loginAgain == 'Y' || loginAgain == 'y');
     }

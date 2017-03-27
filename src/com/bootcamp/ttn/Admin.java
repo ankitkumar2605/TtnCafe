@@ -64,13 +64,13 @@ public class Admin extends User implements TTNCafeInterface{
         return null;
     }
 
-    public void addNewProduct(Product product) {
+    public synchronized void addNewProduct(Product product) {
         Product prod = inventory.put(product.getId(), product);
         if (prod != null)
             System.out.println("Product id already exists!!!!!");
     }
 
-    public void removeProduct(String productid) {
+    public synchronized void removeProduct(String productid) {
         if ((inventory.get(productid)) != null) {
             inventory.remove(productid);
             System.out.println("Product removed from inventory!!!!!");
@@ -87,16 +87,16 @@ public class Admin extends User implements TTNCafeInterface{
         return 0;
     }
 
-    public void updateInventory(String productid,int quantity) {
+    public synchronized void updateInventory(String productid,int quantity) {
         Product product = inventory.get(productid);
         if (product != null) {
             if (product.getQuantity() >= quantity) {
                 product.setQuantity(product.getQuantity() - quantity);
                 inventory.put(productid, product);
             } else
-                System.out.println("Product not available");
+                System.out.println("Product not available!!!!!");
         } else
-            System.out.println("Please enter correct pid");
+            System.out.println("Please enter correct Product Id!!!!!!");
     }
 
     public void printInventory() {

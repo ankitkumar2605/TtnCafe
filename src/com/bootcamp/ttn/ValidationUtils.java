@@ -14,19 +14,13 @@ public class ValidationUtils {
                     return true;
                 } else {
                     System.out.println("Please enter correct password");
-
                 }
-
-
             } else {
                 System.out.println("Please enter valid username or emailid");
-
             }
         } else {
             System.out.println("Please enter valid userId");
-
         }
-
         return false;
     }
 
@@ -34,14 +28,11 @@ public class ValidationUtils {
         return Pattern.matches("[a-zA-Z0-9.]+@[a-zA-Z0-9]+.[a-zA-Z0-9]{3}", email);
     }
 
-
     public static boolean isPasswordValid(String password) {
-
         return Pattern.matches("^[a-zA-Z0-9_]{7,}$", password);
     }
 
     public static boolean isUserIdValid(String userId) {
-
         return Pattern.matches("[\\d]{7}", userId);
     }
 
@@ -51,7 +42,6 @@ public class ValidationUtils {
                 if (adminPassword.equals(password)) {
                     return true;
                 }
-
             }throw new InvalidUserException("Invalid User Credentials!!!!!!");
         }catch (InvalidUserException iUE){
             return false;

@@ -6,7 +6,7 @@ public class EmployeeController extends Controller {
     private Employee emp;
 
     public void startNewEmployeeThread(){
-        Thread employeeThread = new Thread(new EmployeeThread());
+        Thread employeeThread = new Thread(new EmployeeThread(this));
         employeeThread.start();
         try{
             employeeThread.join();
@@ -51,7 +51,7 @@ public class EmployeeController extends Controller {
                 } else
                     System.out.println("Enter correct product id and quantity!!!!!!!!");
             }
-            System.out.print("Do you want to purchase more items?(Y/n): ");
+            System.out.print("Do you want to purchase more items ( Y / N ) ? : ");
             wantContinue = input.nextLine().charAt(0);
         } while (wantContinue == 'y' || wantContinue == 'Y');
     }
@@ -89,7 +89,7 @@ public class EmployeeController extends Controller {
             } else {
                 System.out.println("Please select valid option!!!!!!");
             }
-            System.out.println("Do you want to continue as Employee: ");
+            System.out.println("Do you want to continue as Employee ( Y / N) ? : ");
             employeeContinue = sc.nextLine().charAt(0);
         } while (employeeContinue == 'Y' || employeeContinue == 'y');
     }
