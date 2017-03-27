@@ -14,8 +14,6 @@ public class TTNCafe {
 
         EmployeeController employeeController = new EmployeeController();
         AdminController adminController = new AdminController();
-        Thread adminThread = new Thread(adminController);
-        Thread employeeThread = new Thread(employeeController);
         Scanner sc = new Scanner(System.in);
         boolean ans = false;
         char logInType;
@@ -35,26 +33,13 @@ public class TTNCafe {
             }
 
             if (logInType == 'A' || logInType == 'a') {
-                adminThread = new Thread(adminController);
-                adminThread.start();
+                adminController.startNewAdminThread();
             } else if (logInType == 'E' || logInType == 'e') {
-
-                employeeThread = new Thread(employeeController);
-                employeeThread.start();
-            }
-            try{
-                adminThread.join();
-                employeeThread.join();
-            }catch (InterruptedException ie){
-                System.out.println("Internal Server Error!!!!");
+                employeeController.startNewEmployeeThread();
             }
             System.out.println("You are logged out!!!!!\n");
             System.out.print("Do you want to login : ");
             loginAgain = sc.nextLine().charAt(0);
         } while (loginAgain == 'Y' || loginAgain == 'y');
     }
-
-
-
-
 }

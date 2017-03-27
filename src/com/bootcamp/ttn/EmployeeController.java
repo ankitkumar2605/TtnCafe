@@ -2,24 +2,19 @@ package com.bootcamp.ttn;
 
 import java.util.Scanner;
 
-/**
- * Created by ankit on 24/3/17.
- */
-public class EmployeeController extends Controller implements Runnable {
+public class EmployeeController extends Controller {
     private Employee emp;
 
-    @Override
-    public void run() {
-        Scanner sc = new Scanner(System.in);
-        System.out.print("Enter user email : ");
-        String name = sc.nextLine();
+    public void startNewEmployeeThread(){
+        Thread employeeThread = new Thread(new EmployeeThread());
+        employeeThread.start();
+        try{
+            employeeThread.join();
+        }catch(InterruptedException e){
+            e.printStackTrace();
+        }
 
-        System.out.print("Enter user password : ");
-        String password = sc.nextLine();
-
-        authenticateEmployee(name, password);
     }
-
     public void authenticateEmployee(String email, String password) {
         emp = admin.getEmployee(email, password);
         if (emp != null) {

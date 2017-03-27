@@ -1,8 +1,5 @@
 package com.bootcamp.ttn;
 
-/**
- * Created by ankit on 23/3/17.
- */
 public class Product extends TTNCafeBase{
 
     private int price;

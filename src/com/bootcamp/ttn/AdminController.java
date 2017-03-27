@@ -1,26 +1,19 @@
 package com.bootcamp.ttn;
 
-import com.sun.javafx.binding.StringFormatter;
-
 import java.util.Scanner;
 
-/**
- * Created by ankit on 23/3/17.
- */
-public class AdminController extends Controller implements Runnable{
+public class AdminController extends Controller{
 
-    @Override
-    public void run() {
-        Scanner sc = new Scanner(System.in);
-        System.out.print("Enter admin email : ");
-        String name = sc.nextLine();
+    public void startNewAdminThread(){
+        Thread adminThread = new Thread(new AdminThread());
+        adminThread.start();
+        try {
+            adminThread.join();
+        }catch (InterruptedException e){
+            e.printStackTrace();
+        }
 
-        System.out.print("Enter admin password : ");
-        String password = sc.nextLine();
-
-        authenticateAdmin(name,password);
     }
-
     public void addProductIntoInventory(Admin admin) {
 
 
